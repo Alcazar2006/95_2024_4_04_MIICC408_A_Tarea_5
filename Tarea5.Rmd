@@ -1,0 +1,60 @@
+```{r}
+
+install.packages("rpart")
+install.packages("rpart.plot")
+
+ library(rpart)
+library(rpart.plot)
+
+hogar <- read.csv('C:/Users/dalca/Downloads/db_csv_/db_csv_/HOGAR_BDP.csv', sep = ',')
+
+arbol1 <- rpart(AREA ~
+               PCH1+
+               PCH2+
+               PCH3+
+               PCH6+
+               PCH9_A+
+               PCH9_B+
+               PCH15,
+               data = hogar, method = "class")
+
+rpart.plot(arbol1, type=2, extra=0, under = TRUE, fallen.leaves = TRUE, box.palette = "BuGn", 
+           main ="Predicción de Area", cex = 1)
+
+
+casa <- data.frame(
+  PCH1=c(2),
+  PCH2=c(3),
+  PCH3=c(1),
+  PCH6=c(1),
+  PCH9_A=c(1),
+  PCH9_B=c(2),
+  PCH15=c(1)
+)
+
+result <- predict(arbol,casa, type="class")
+
+result
+
+
+hogar
+
+arbol2 <- rpart(DEPARTAMENTO ~
+               AREA+
+               PCH10+
+               PCH8+
+               PCH9_A+
+               PCH9_B+
+               PCH9_C+
+               PCH9_D+
+               PCH9_E+
+               PCH9_F+
+               PCH15,
+               data = hogar, method = "class")
+
+rpart.plot(arbol2, type=2, extra=0, under = TRUE, fallen.leaves = TRUE, box.palette = "BuGn", 
+           main ="Predicción de Departamento", cex = 1)
+
+
+```
+
